@@ -20,3 +20,18 @@ data$datetime <- as.POSIXct(datetime)
 
 
 ## Create Plot 4
+par(mfrow = c(2, 2))
+
+with(data, plot(datetime, Global_active_power, type = 'l', ylab = 'Global Active Power (kilowatts)', xlab = ''))
+
+with(data, plot(datetime, Voltage, type = 'l', ylab = 'Voltage (volt)', xlab = ''))
+
+plot(data$datetime, data$Sub_metering_1, type = 'l', ylab = 'Energy sub metering', xlab = '')
+with(data, lines(datetime, Sub_metering_2, col = 'red'))
+with(data, lines(datetime, Sub_metering_3, col = 'blue'))
+legend("topright", col = c("black", "red", "blue"), lwd = c(1,1,1), c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
+
+with(data, plot(datetime, Global_reactive_power, type = 'l'))
+
+dev.copy(png, "plot4.png", width = 480, height = 480)
+dev.off()
